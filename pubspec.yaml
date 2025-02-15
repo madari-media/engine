@@ -1,5 +1,5 @@
 name: madari_engine
-description: A starting point for Dart libraries or applications.
+description: Madari engine for the madari app
 version: 1.0.0
 repository: https://github.com/madari-media/engine
 
