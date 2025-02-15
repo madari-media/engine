@@ -22,17 +22,23 @@ class MadariEngine {
     required this.pb,
   }) {
     authService = AuthService(pb: pb);
+    authService.setup();
     addonService = AddonService(pb: pb);
+    addonService.setup();
     catalogService = CatalogService(
       pb: pb,
       addonService: addonService,
       authService: authService,
     );
+    catalogService.setup();
     exploreService = ExploreService(
       pb: pb,
       addonService: addonService,
     );
+    exploreService.setup();
     profileService = ProfileService(pb: pb);
+    profileService.setup();
     listService = ListService(pb: pb, profileService: profileService);
+    listService.setup();
   }
 }

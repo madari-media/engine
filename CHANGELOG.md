@@ -10,3 +10,8 @@
 ## 1.0.2
 
 - Expose more types
+
+
+## 1.0.3
+
+- Added setup to the lifecycle
