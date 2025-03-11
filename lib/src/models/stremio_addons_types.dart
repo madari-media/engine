@@ -272,12 +272,16 @@ class StreamMetaResponse {
 class StrmioMeta {
   @JsonKey(name: "metas")
   final List<Meta>? metas;
+
   @JsonKey(name: "hasMore")
   final bool? hasMore;
+
   @JsonKey(name: "cacheMaxAge")
   final int? cacheMaxAge;
+
   @JsonKey(name: "staleRevalidate")
   final int? staleRevalidate;
+
   @JsonKey(name: "staleError")
   final int? staleError;
 
@@ -314,48 +318,70 @@ class StrmioMeta {
 class Meta {
   @JsonKey(name: "imdb_id")
   final String? imdbId;
+
   @JsonKey(name: "name")
   final String? name;
+
   @JsonKey(name: "popularities")
   final Map<String, double?>? popularities;
+
   @JsonKey(name: "type")
   final String type;
+
   @JsonKey(name: "cast")
   final List<String>? cast;
+
   @JsonKey(name: "country")
   final String? country;
+
   @JsonKey(name: "description")
   final String? description;
+
   @JsonKey(name: "genre")
   final List<String>? genre;
+
   @JsonKey(name: "imdbRating")
   final dynamic imdbRating_;
+
   @JsonKey(name: "tmdbRating")
   final dynamic tmdbRating_;
+
   @JsonKey(name: "poster")
   String? poster;
+
   @JsonKey(name: "released")
   final DateTime? released;
+
   @JsonKey(name: "slug")
   final String? slug;
+
   @JsonKey(name: "year")
   final dynamic year;
+
   @JsonKey(name: "status")
   final String? status;
+
   @JsonKey(name: "tvdb_id")
   final dynamic tvdbId;
+
   @JsonKey(name: "director")
   final List<dynamic>? director;
+
   @JsonKey(name: "writer")
   final List<String>? writer;
+
   @JsonKey(name: "background")
   String? background;
+
   @JsonKey(name: "logo")
   final String? logo;
+
   @JsonKey(name: "awards")
   final String? awards;
+
   @JsonKey(name: "moviedb_id")
   final int? moviedbId;
+
   @JsonKey(name: "runtime")
   final String? runtime_;
 
@@ -373,28 +399,40 @@ class Meta {
 
   @JsonKey(name: "trailers")
   final List<Trailer>? trailers;
+
   @JsonKey(name: "popularity")
   final double? popularity;
+
   @JsonKey(name: "id")
   final String id;
+
   @JsonKey(name: "videos")
   List<Video>? videos;
+
   @JsonKey(name: "genres")
   final List<String>? genres;
+
   @JsonKey(name: "releaseInfo")
   final dynamic releaseInfo_;
+
   @JsonKey(name: "trailerStreams")
   final List<TrailerStream>? trailerStreams;
+
   @JsonKey(name: "links")
   final List<Link>? links;
+
   @JsonKey(name: "behaviorHints")
   final BehaviorHints? behaviorHints;
+
   @JsonKey(name: "credits_cast")
   final List<CreditsCast>? creditsCast;
+
   @JsonKey(name: "credits_crew")
   final List<CreditsCrew>? creditsCrew;
+
   @JsonKey(name: "language")
   final String? language;
+
   @JsonKey(name: "dvdRelease")
   final DateTime? dvdRelease;
 
@@ -580,6 +618,7 @@ class Meta {
 class BehaviorHints {
   @JsonKey(name: "defaultVideoId")
   final dynamic defaultVideoId;
+
   @JsonKey(name: "hasScheduledVideos", defaultValue: false)
   final bool hasScheduledVideos;
 

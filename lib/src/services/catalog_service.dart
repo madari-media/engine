@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:js_interop';
 
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
@@ -12,6 +13,7 @@ import '../models/stremio_addons_types.dart';
 import '../types/cast_info.dart';
 import 'catalog_service/types.dart';
 
+@JSExport()
 class CatalogService extends MadariService {
   final Logger _logger = Logger('CatalogService');
   final AddonService addonService;

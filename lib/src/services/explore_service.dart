@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:js_interop';
 
 import 'package:madari_engine/src/models/stremio_addons_types.dart';
 import 'package:madari_engine/src/services/addon_service.dart';
 import 'package:madari_engine/src/types/madari_service.dart';
 
+@JSExport()
 class ExploreService extends MadariService {
   final AddonService addonService;
   ExploreService({

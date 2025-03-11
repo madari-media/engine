@@ -1,6 +1,6 @@
 name: madari_engine
 description: Madari engine for the madari app
-version: 1.0.3
+version: 1.0.6
 repository: https://github.com/madari-media/engine
 
 environment:
@@ -11,6 +11,7 @@ dependencies:
   pocketbase: ^0.19.1
   logging: ^1.3.0
   http: ^1.3.0
+  rxdart: ^0.28.0
 
 dev_dependencies:
   lints: ^5.0.0

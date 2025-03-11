@@ -15,3 +15,15 @@
 ## 1.0.3
 
 - Added setup to the lifecycle
+
+## 1.0.4
+
+- Added some g.dart
+
+## 1.0.5
+
+- Exports more types
+
+## 1.0.6
+
+- Notifications for the profile select

@@ -1,14 +1,19 @@
 import 'dart:async';
+import 'dart:js_interop';
 
 import 'package:logging/logging.dart';
+import 'package:madari_engine/src/services/profile_service/types.dart';
 import 'package:madari_engine/src/types/madari_service.dart';
 import 'package:pocketbase/pocketbase.dart';
+import 'package:rxdart/rxdart.dart';
 
+@JSExport()
 class ProfileService extends MadariService {
   final Logger _logger = Logger('ProfileService');
   UserProfile? _profile;
   List<UserProfile>? _availableProfiles;
   late StreamSubscription<AuthStoreEvent> _listeners;
+  final onProfileUpdate = BehaviorSubject.seeded(true);
 
   ProfileService({
     required super.pb,
@@ -41,6 +46,9 @@ class ProfileService extends MadariService {
       _profile = _availableProfiles!.firstWhere((item) {
         return item.id == id;
       });
+
+      onProfileUpdate.add(false);
+
       _logger.info('Successfully set current profile to: ${_profile?.name}');
     } catch (e) {
       _logger.warning('Failed to set profile with ID $id: $e');
@@ -105,6 +113,8 @@ class ProfileService extends MadariService {
         },
       );
 
+      onProfileUpdate.add(false);
+
       final profile = UserProfile(
         id: user.id,
         name: user.getStringValue("name"),
@@ -133,6 +143,8 @@ class ProfileService extends MadariService {
       );
     }
 
+    onProfileUpdate.add(false);
+
     try {
       await pb.collection("account_profile").delete(id);
       _logger.info('Successfully deleted profile: $id');
@@ -151,18 +163,4 @@ class ProfileService extends MadariService {
     _logger.info('Disposing ProfileService');
     _listeners.cancel();
   }
-}
-
-class UserProfile {
-  final String id;
-  final String name;
-  final String? profileImage;
-  final bool canSearch;
-
-  UserProfile({
-    required this.id,
-    required this.name,
-    this.profileImage,
-    this.canSearch = true,
-  });
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:js_interop';
 
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
@@ -7,7 +8,9 @@ import 'package:madari_engine/src/types/madari_service.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 import '../models/stremio_addons_types.dart';
+import 'addon_service/types.dart';
 
+@JSExport()
 class AddonService extends MadariService {
   final Logger _logger = Logger('AuthService');
   final _addonsCache = <PocketBaseStremioAddon>[];
@@ -233,48 +236,5 @@ class AddonService extends MadariService {
     return input.endsWith("/manifest.json")
         ? input.replaceAll("/manifest.json", "")
         : input;
-  }
-}
-
-class PocketBaseStremioAddon {
-  final String? id;
-  final String url;
-  final String title;
-  final String? icon;
-  final bool enabled;
-
-  PocketBaseStremioAddon({
-    required this.url,
-    required this.title,
-    required this.icon,
-    required this.enabled,
-    this.id,
-  });
-
-  PocketBaseStremioAddon copyWith({
-    String? url,
-    String? title,
-    String? icon,
-    bool? enabled,
-    String? id,
-  }) {
-    return PocketBaseStremioAddon(
-      url: url ?? this.url,
-      title: title ?? this.title,
-      icon: icon ?? this.icon,
-      enabled: enabled ?? this.enabled,
-      id: id ?? this.id,
-    );
-  }
-
-  Map<String, dynamic> toJson(PocketBase pb) {
-    return {
-      if (id != null) 'id': id,
-      'url': url,
-      'title': title,
-      'icon': icon,
-      'enabled': enabled,
-      'user': pb.authStore.record!.id,
-    };
   }
 }
