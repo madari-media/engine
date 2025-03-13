@@ -28,6 +28,24 @@ class HomeLayout {
 
     return null;
   }
+
+  HomeLayout copyWith({
+    String? id,
+    String? title,
+    dynamic config,
+    int? order,
+    String? pluginId,
+    String? type,
+  }) {
+    return HomeLayout(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      config: config ?? this.config,
+      order: order ?? this.order,
+      pluginId: pluginId ?? this.pluginId,
+      type: type ?? this.type,
+    );
+  }
 }
 
 @JsonSerializable()

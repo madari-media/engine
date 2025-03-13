@@ -1,6 +1,6 @@
 name: madari_engine
 description: Madari engine for the madari app
-version: 1.0.6
+version: 1.0.10
 repository: https://github.com/madari-media/engine
 
 environment:

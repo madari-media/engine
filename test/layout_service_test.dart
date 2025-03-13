@@ -24,7 +24,7 @@ void main() async {
 
   final authService = AuthService(pb: profileService.pb);
 
-  final result = await authService.signInWithEmail(
+  await authService.signInWithEmail(
     email: mockUsername,
     password: mockPassword,
   );

@@ -24,24 +24,24 @@ class MadariEngine {
     required PocketBase pb,
   }) {
     _pb = pb;
-    authService = AuthService(pb: pb);
+    authService = AuthService(pb: _pb);
     authService.setup();
-    addonService = AddonService(pb: pb);
+    addonService = AddonService(pb: _pb);
     addonService.setup();
     catalogService = CatalogService(
-      pb: pb,
+      pb: _pb,
       addonService: addonService,
       authService: authService,
     );
     catalogService.setup();
     exploreService = ExploreService(
-      pb: pb,
+      pb: _pb,
       addonService: addonService,
     );
     exploreService.setup();
-    profileService = ProfileService(pb: pb);
+    profileService = ProfileService(pb: _pb);
     profileService.setup();
-    listService = ListService(pb: pb, profileService: profileService);
+    listService = ListService(pb: _pb, profileService: profileService);
     listService.setup();
   }
 

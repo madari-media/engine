@@ -27,3 +27,19 @@
 ## 1.0.6
 
 - Notifications for the profile select
+
+## 1.0.7
+
+- Added layout service
+
+## 1.0.8
+
+- Remove JSExport
+
+## 1.0.9
+
+- Add get meta information
+
+## 1.0.10
+
+- Added QR Authentication

@@ -606,6 +606,7 @@ class Meta {
 
   Map<String, dynamic> toJson() => _$MetaToJson(this);
 
+  @override
   String toString() {
     if (currentVideo != null) {
       return "$name ${currentVideo!.name} S${currentVideo!.season} E${currentVideo!.episode}";

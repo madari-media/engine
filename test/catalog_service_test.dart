@@ -93,7 +93,7 @@ void main() {
 
       assert(result.isNotEmpty);
 
-      final rs = await explore.getCatalogs("movie");
+      await explore.getCatalogs("movie");
     });
   });
 }

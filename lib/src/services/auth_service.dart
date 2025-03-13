@@ -144,6 +144,48 @@ class AuthService extends MadariService {
       );
     }
   }
+
+  Future<AuthResponse<String>> getQrLoginId() async {
+    _logger.info('Requesting QR login ID');
+
+    try {
+      final result = await pb.send('/api/v1/auth-with-qr', method: 'GET');
+      
+      _logger.info('Successfully obtained QR login ID');
+      return AuthResponse(
+        success: true,
+        payload: result['qr_id'],
+      );
+    } on ClientException catch (e) {
+      _logger.warning('Failed to get QR login ID. Error: ${e.response["message"]}');
+      return AuthResponse(
+        success: false,
+        error: e.response["message"],
+      );
+    }
+  }
+
+  Future<AuthResponse<RecordAuth>> validateQrLogin({
+    required String qrId,
+  }) async {
+    _logger.info('Validating QR login for ID: $qrId');
+
+    try {
+      final result = await pb.send('/api/v1/auth-with-qr/validate?qr_id=$qrId', method: 'GET');
+      
+      _logger.info('Successfully validated QR login for ID: $qrId');
+      return AuthResponse(
+        success: true,
+        payload: result,
+      );
+    } on ClientException catch (e) {
+      _logger.warning('Failed to validate QR login for ID: $qrId. Error: ${e.response["message"]}');
+      return AuthResponse(
+        success: false,
+        error: e.response["message"],
+      );
+    }
+  }
 }
 
 class AuthResponse<T> {
