@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:pocketbase/pocketbase.dart';
 
 class PocketBaseStremioAddon {
@@ -17,7 +15,6 @@ class PocketBaseStremioAddon {
     this.id,
   });
 
-  @JSExport()
   PocketBaseStremioAddon copyWith({
     String? url,
     String? title,
@@ -34,7 +31,6 @@ class PocketBaseStremioAddon {
     );
   }
 
-  @JSExport()
   Map<String, dynamic> toJson(PocketBase pb) {
     return {
       if (id != null) 'id': id,

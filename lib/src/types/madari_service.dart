@@ -9,6 +9,6 @@ abstract class MadariService {
     required this.pb,
   });
 
-  FutureOr<void> setup();
-  dispose();
+  FutureOr<void> setup() {}
+  dispose() {}
 }

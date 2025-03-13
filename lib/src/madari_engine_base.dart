@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:madari_engine/src/services/addon_service.dart';
 import 'package:madari_engine/src/services/auth_service.dart';
 import 'package:madari_engine/src/services/catalog_service.dart';
@@ -13,9 +11,7 @@ export './services/catalog_service/types.dart';
 export './services/list_service/index.dart';
 export './services/profile_service/types.dart';
 
-@JSExport()
 class MadariEngine {
-  @JSExport()
   late final PocketBase _pb;
   late final AuthService authService;
   late final AddonService addonService;

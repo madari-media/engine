@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:js_interop';
 
 import 'package:logging/logging.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 import '../types/madari_service.dart';
 
-@JSExport()
 class AuthService extends MadariService {
   final Logger _logger = Logger('AuthService');
 

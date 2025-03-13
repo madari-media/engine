@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:js_interop';
 
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
@@ -10,7 +9,6 @@ import 'package:pocketbase/pocketbase.dart';
 import '../models/stremio_addons_types.dart';
 import 'addon_service/types.dart';
 
-@JSExport()
 class AddonService extends MadariService {
   final Logger _logger = Logger('AuthService');
   final _addonsCache = <PocketBaseStremioAddon>[];

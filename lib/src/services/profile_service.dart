@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:js_interop';
 
 import 'package:logging/logging.dart';
 import 'package:madari_engine/src/services/profile_service/types.dart';
@@ -7,7 +6,6 @@ import 'package:madari_engine/src/types/madari_service.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:rxdart/rxdart.dart';
 
-@JSExport()
 class ProfileService extends MadariService {
   final Logger _logger = Logger('ProfileService');
   UserProfile? _profile;

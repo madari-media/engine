@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'dart:js_interop';
 
 import 'package:madari_engine/src/services/profile_service.dart';
 
-@JSExport()
 class ListModel {
   final String id;
   final String name;
@@ -43,7 +41,6 @@ class ListModel {
     };
   }
 
-  @JSExport()
   ListModel copyWith({
     String? name,
     String? description,
@@ -62,7 +59,6 @@ class ListModel {
   }
 }
 
-@JSExport()
 class ListItemModel {
   final String id;
   final String type;
@@ -120,7 +116,6 @@ class CreateListRequest {
     required this.description,
   });
 
-  @JSExport()
   Future<Map<String, dynamic>> toJson(ProfileService service) async {
     return {
       'name': name,
@@ -142,7 +137,6 @@ class UpdateListRequest {
     required this.description,
   });
 
-  @JSExport()
   Map<String, dynamic> toJson() {
     return {
       'name': name,

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:js_interop';
 
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
@@ -13,7 +12,6 @@ import '../models/stremio_addons_types.dart';
 import '../types/cast_info.dart';
 import 'catalog_service/types.dart';
 
-@JSExport()
 class CatalogService extends MadariService {
   final Logger _logger = Logger('CatalogService');
   final AddonService addonService;
@@ -262,7 +260,71 @@ class CatalogService extends MadariService {
     return items;
   }
 
-  Future<Meta?> getMeta() async {
+  Future<Meta?> getMeta(String type, String id) async {
+    final addons = await addonService.getAddonManifest();
+    _logger.info('Fetching meta data for $type/$id');
+
+    for (final manifest in addons) {
+      if (manifest.resources == null) {
+        _logger.finer('No resources found in manifest: ${manifest.name}');
+        continue;
+      }
+
+      final metaResource = manifest.resources?.firstWhereOrNull((resource) =>
+          resource.name == "meta" && resource.types?.contains(type) == true);
+
+      if (metaResource == null) {
+        _logger.finer(
+            'No meta resource found for type $type in: ${manifest.name}');
+        continue;
+      }
+
+      final idPrefixes = [
+        ...(manifest.idPrefixes ?? []),
+        ...(metaResource.idPrefix ?? []),
+        ...(metaResource.idPrefixes ?? [])
+      ];
+
+      final hasMatchingPrefix = idPrefixes.isEmpty ||
+          idPrefixes.any((prefix) => id.startsWith(prefix));
+
+      if (!hasMatchingPrefix) {
+        _logger
+            .finer('No matching ID prefix found for $id in: ${manifest.name}');
+        continue;
+      }
+
+      try {
+        final url =
+            "${addonService.getAddonBaseURL(manifest.manifestUrl!)}/meta/$type/$id.json";
+        _logger.fine('Requesting meta from: $url');
+
+        final response = await http.get(Uri.parse(url));
+
+        if (response.statusCode != 200) {
+          _logger.warning(
+              'Failed with status ${response.statusCode} from: ${manifest.name}');
+          continue;
+        }
+
+        final bodyParsed = utf8.decode(response.bodyBytes);
+        final data = jsonDecode(bodyParsed);
+
+        if (data['meta'] == null) {
+          _logger.finer('No meta data found for $id in: ${manifest.name}');
+          continue;
+        }
+
+        final meta = StreamMetaResponse.fromJson(data);
+
+        return meta.meta;
+      } catch (e, stack) {
+        _logger.warning('Error fetching meta from ${manifest.name}', e, stack);
+        continue;
+      }
+    }
+
+    _logger.info('No metadata found for $type/$id');
     return null;
   }
 
